@@ -19,17 +19,17 @@ func travel():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		var vec = Vector2(0, 0)
-		if event.keycode == KEY_W:
+		if event.keycode in [KEY_W, KEY_U]:
 			vec = Vector2(0, -1)
-		if event.keycode == KEY_E:
+		if event.keycode in [KEY_E, KEY_I]:
 			vec = Vector2(1, -1)
-		if event.keycode == KEY_D:
+		if event.keycode in [KEY_D, KEY_L]:
 			vec = Vector2(1, 0)
-		if event.keycode == KEY_X:
+		if event.keycode in [KEY_X, KEY_M]:
 			vec = Vector2(0, 1)
-		if event.keycode == KEY_Z:
+		if event.keycode in [KEY_Z, KEY_N]:
 			vec = Vector2(-1, 1)
-		if event.keycode == KEY_A:
+		if event.keycode in [KEY_A, KEY_H]:
 			vec = Vector2(-1, 0)
 		var new_pos = map_cords + vec
 		if not new_pos in tail and not vec == Vector2(0,0):
