@@ -1,10 +1,12 @@
 extends Node
 
 var tile_tex
+var tail_tex
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tile_tex = load("Assets/Images/empty_hexagon.PNG")
+	tail_tex = load("icon.svg")
 
 var sidelength = 32
 func to_real_cords(cords):

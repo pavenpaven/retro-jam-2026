@@ -1,7 +1,9 @@
 extends Node2D
 
+@onready var head = $Head
 var map = {}
 var map_sprites = {}
+var tail_segs = []
 
 func _ready():
 	for i in range(10):
@@ -14,6 +16,21 @@ func _ready():
 			sprite.texture = Globals.tile_tex
 			add_child(sprite)
 
+	for i in head.tail:
+		print(i)
+		var sprite = Sprite2D.new()
+		tail_segs.append(sprite)
+		sprite.texture = Globals.tail_tex
+		sprite.scale = Vector2(0.2, 0.2)
+		add_child(sprite)
+
+func allowed(pos):		
+	return true
+		
 func _process(dt):
-	pass
+	var n = 0
+	for i in head.tail:
+		tail_segs[n].position = Globals.to_real_cords(i)
+
+		n+=1
 			
