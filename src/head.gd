@@ -29,6 +29,9 @@ func on_damage():
 		tail.remove_at(0)
 		is_invicible = true
 		invictimer.start()
+
+func on_enemy_touch():
+	on_damage()
 		
 	
 func _input(event):

@@ -5,6 +5,7 @@ var map = {}
 var map_sprites = {}
 var map_content_sprites = {}
 var tail_segs = []
+var enemies = []
 
 var prop = 1.0
 
@@ -39,6 +40,13 @@ func _ready():
 		sprite.texture = Globals.tails_tex[0]
 		add_child(sprite)
 
+	var enemy_scene = load("res://Scenes/enemy.tscn")
+	var enemy = enemy_scene.instantiate()
+	enemy.map_cords = Vector2(1,1)
+	enemy.attack.connect(head.on_enemy_touch)
+	enemies.append(enemy)
+	add_child(enemy)
+
 func tile_sheet(tile):
 	return {"empty": "nothing"
 		   ,"rock": "rock"
@@ -52,6 +60,14 @@ func allowed(pos):
 	if pos.y < 0 or pos.y >= 8: return false
 	if (pos.y + 2*pos.x) < 1 : return false
 	if (pos.y + 2*pos.x) >= 24: return false
+
+	for i in enemies:
+		if i.map_cords == pos:
+			return false
+		
+	for i in head.tail.slice(1) + [head.map_cords]:
+		if i == pos:
+			return false
 	
 	return not map[pos]["type"] in ["rock"]
 
@@ -139,7 +155,8 @@ func _process(dt):
 	handle_eel_baby()
 	if numfire / (20*10) < (1 - prop):
 		spawn()
-		
+
+
 func handle_eel_baby():
 	var eel_baby_exists = false
 	for k in map_sprites:
@@ -175,3 +192,6 @@ func _on_timer_timer_timeout() -> void:
 	prop = prop * (1 - 0.01)
 
 	
+func _on_enemy_tick_timeout() -> void:
+	for i in enemies:
+		i.on_tick(head)

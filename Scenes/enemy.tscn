@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dgbn6c5h526vv"]
 
+[ext_resource type="Script" uid="uid://cq5dudgigogn2" path="res://src/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://miken7nk22d7" path="res://Assets/Images/seagull.PNG" id="1_hghv2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
@@ -51,7 +52,8 @@ animations = [{
 }]
 
 [node name="enemy" type="Node2D" unique_id=2135361342]
+script = ExtResource("1_1f0kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=990975987]
 sprite_frames = SubResource("SpriteFrames_7kbpi")
-animation = &"seagulldie"
+animation = &"seagullfly"
