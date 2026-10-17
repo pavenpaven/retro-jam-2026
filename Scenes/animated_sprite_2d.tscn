@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dgjkjgdwmolok" path="res://Assets/Images/fireprojectile.PNG" id="2_r3knd"]
 [ext_resource type="Texture2D" uid="uid://dwrfhpw4lwdsr" path="res://Assets/Images/pickedMedia1 2.PNG" id="3_h28pi"]
 [ext_resource type="Texture2D" uid="uid://2ubnyvwtspx0" path="res://Assets/Images/rock.PNG" id="4_j6oam"]
+[ext_resource type="Texture2D" uid="uid://c1f36i0tcq1do" path="res://Assets/Images/nothing.PNG" id="4_r3knd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlrca"]
 atlas = ExtResource("1_318so")
@@ -31,6 +32,10 @@ region = Rect2(38, 0, 19, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5p2j6"]
 atlas = ExtResource("3_h28pi")
+region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h28pi"]
+atlas = ExtResource("4_r3knd")
 region = Rect2(0, 0, 33, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6ntp"]
@@ -77,6 +82,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h28pi")
+}],
+"loop": 1,
+"name": &"nothing",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_v6ntp")
 }],
 "loop": 1,
@@ -86,4 +99,4 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]
 sprite_frames = SubResource("SpriteFrames_pv606")
-animation = &"rock"
+animation = &"nothing"
