@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dwrfhpw4lwdsr" path="res://Assets/Images/pickedMedia1 2.PNG" id="3_h28pi"]
 [ext_resource type="Texture2D" uid="uid://2ubnyvwtspx0" path="res://Assets/Images/rock.PNG" id="4_j6oam"]
 [ext_resource type="Texture2D" uid="uid://c1f36i0tcq1do" path="res://Assets/Images/nothing.PNG" id="4_r3knd"]
+[ext_resource type="Texture2D" path="res://Assets/Images/spritesheet 2.PNG" id="6_j6oam"]
+[ext_resource type="Texture2D" path="res://Assets/Images/spritesheet.PNG" id="7_hlrca"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlrca"]
 atlas = ExtResource("1_318so")
@@ -41,6 +43,34 @@ region = Rect2(0, 0, 33, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6ntp"]
 atlas = ExtResource("4_j6oam")
 region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujo64"]
+atlas = ExtResource("6_j6oam")
+region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocbf5"]
+atlas = ExtResource("6_j6oam")
+region = Rect2(33, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3033i"]
+atlas = ExtResource("6_j6oam")
+region = Rect2(0, 37, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w36o"]
+atlas = ExtResource("6_j6oam")
+region = Rect2(33, 37, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2wnn"]
+atlas = ExtResource("7_hlrca")
+region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcdmg"]
+atlas = ExtResource("7_hlrca")
+region = Rect2(33, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd2go"]
+atlas = ExtResource("7_hlrca")
+region = Rect2(0, 37, 33, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pv606"]
 animations = [{
@@ -95,8 +125,39 @@ animations = [{
 "loop": 1,
 "name": &"rock",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujo64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocbf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3033i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w36o")
+}],
+"loop": 1,
+"name": &"star",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2wnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcdmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd2go")
+}],
+"loop": 1,
+"name": &"starrise",
+"speed": 10.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]
 sprite_frames = SubResource("SpriteFrames_pv606")
-animation = &"nothing"
+animation = &"starrise"
