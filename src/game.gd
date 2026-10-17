@@ -13,13 +13,16 @@ func _ready():
 			if randi() % 10 == 0:
 				map[Vector2(i,j)] = {"type": "rock"}
 
+			if randi() % 10 == 0:
+				map[Vector2(i,j)] = {"type": "fire"}
+
 			var sprite = Sprite2D.new()
 			map_sprites[Vector2(i,j)] = sprite
 			sprite.position = Globals.to_real_cords(Vector2(i,j))
 			sprite.texture = Globals.tile_tex
 			add_child(sprite)
 
-			sprite = Sprite2D.new()
+			sprite = AnimatedSprite2D.new()
 			map_content_sprites[Vector2(i,j)] = sprite
 			sprite.position = Globals.to_real_cords(Vector2(i,j))
 			add_child(sprite)
@@ -31,7 +34,9 @@ func _ready():
 		add_child(sprite)
 
 func tile_texture(tile):
-	return {"empty": null, "rock": Globals.rock_tex}[tile["type"]]
+	return {"empty": null
+		   ,"rock": Globals.rock_tex
+		   ,"fire": Globals.fire_tex}[tile["type"]]
 
 
 func allowed(pos):		
