@@ -6,6 +6,8 @@ var map_sprites = {}
 var map_content_sprites = {}
 var tail_segs = []
 var enemies = []
+@export var does_fire_extinguish_on_contact = true
+
 
 var prop = 1.0
 
@@ -80,6 +82,8 @@ func on_tick():
 	for i in head.tail + [head.map_cords]:
 		if map[i]["type"] in ["fire"]:
 			head.on_damage()
+			if does_fire_extinguish_on_contact:
+				map[i] = {"type": "empty"}
 
 		if map[i]["type"] == "eelbaby":
 			map[i] = {"type": "empty"}

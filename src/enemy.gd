@@ -2,16 +2,24 @@ extends Node2D
 
 signal attack
 var map_cords
+var id
+var dead = false
 @onready var anim = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	id = randi()
 	anim.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position = Globals.to_real_cords(map_cords)
+	var	map = get_parent().map
+	if map[map_cords]["type"] == "fire":
+		anim.play("seagulldie")
+		var dead = true
+		
 	
 
 func on_tick(head):
@@ -33,7 +41,20 @@ func on_tick(head):
 			best_move = i
 
 	#TODO check if allowed
-	if min_distance == 0:
-		attack.emit()
-	else:
-		map_cords += best_move
+	print(dead)
+	if not dead:
+		if min_distance == 0:
+			attack.emit()
+		else:
+			map_cords += best_move
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	var ind
+	var n = 0
+	for i in get_parent().enemies:
+		if i.id == id:
+			ind = n
+		n+=1
+	get_parent().enemies.remove_at(ind)
+	queue_free()

@@ -29,9 +29,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1f0kj")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"seagulldie",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -57,3 +57,6 @@ script = ExtResource("1_1f0kj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=990975987]
 sprite_frames = SubResource("SpriteFrames_7kbpi")
 animation = &"seagullfly"
+autoplay = "seagullfly"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
