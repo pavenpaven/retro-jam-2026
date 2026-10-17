@@ -1,7 +1,7 @@
 extends Node2D
 
 var map_cords = Vector2(5,5)
-var tail      = [Vector2(4,4),Vector2(5,4)]
+var tail      = [Vector2(1,2),Vector2(2,2),Vector2(2,3),Vector2(3,3), Vector2(3,4), Vector2(4,4),Vector2(5,4)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +32,6 @@ func _input(event):
 		if event.keycode in [KEY_A, KEY_H]:
 			vec = Vector2(-1, 0)
 		var new_pos = map_cords + vec
-		if not new_pos in tail and not vec == Vector2(0,0):
+		if not new_pos in tail.slice(1) and not vec == Vector2(0,0) and get_parent().allowed(new_pos):
 			travel()
 			map_cords = new_pos

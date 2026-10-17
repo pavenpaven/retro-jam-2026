@@ -4,10 +4,12 @@ var tile_tex
 var head_tex  = []
 var body_tex  = []
 var tails_tex = []
+var rock_tex
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tile_tex = load("Assets/Images/empty_hexagon.PNG")
+	rock_tex = load("Assets/Images/rock.PNG")
 	for i in range(1,7):
 		head_tex.append(load("Assets/Images/eel/eelhead" + str(i) + ".PNG"))
 

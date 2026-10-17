@@ -3,17 +3,25 @@ extends Node2D
 @onready var head = $Head
 var map = {}
 var map_sprites = {}
+var map_content_sprites = {}
 var tail_segs = []
 
 func _ready():
-	for i in range(10):
+	for i in range(-5, 15):
 		for j in range(10):
-			map[Vector2(i,j)] = {"Passable": true}
+			map[Vector2(i,j)] = {"type": "empty"}
+			if randi() % 10 == 0:
+				map[Vector2(i,j)] = {"type": "rock"}
 
 			var sprite = Sprite2D.new()
 			map_sprites[Vector2(i,j)] = sprite
 			sprite.position = Globals.to_real_cords(Vector2(i,j))
 			sprite.texture = Globals.tile_tex
+			add_child(sprite)
+
+			sprite = Sprite2D.new()
+			map_content_sprites[Vector2(i,j)] = sprite
+			sprite.position = Globals.to_real_cords(Vector2(i,j))
 			add_child(sprite)
 
 	for i in head.tail:
@@ -22,8 +30,12 @@ func _ready():
 		sprite.texture = Globals.tails_tex[0]
 		add_child(sprite)
 
+func tile_texture(tile):
+	return {"empty": null, "rock": Globals.rock_tex}[tile["type"]]
+
+
 func allowed(pos):		
-	return true
+	return map[pos]["type"] == "empty"
 
 func orientation(v):
 	var ind
@@ -55,4 +67,7 @@ func _process(dt):
 				tail_segs[n].texture = Globals.head_tex[ind]
 				
 		n+=1
+
+	for k in map_sprites:
+		map_content_sprites[k].texture = tile_texture(map[k])
 			
