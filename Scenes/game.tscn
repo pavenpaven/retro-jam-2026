@@ -20,28 +20,50 @@ position = Vector2(192.41667, 108)
 scale = Vector2(1.1957425, 1.1145834)
 texture = ExtResource("3_wrm1d")
 
-[node name="bubbloranimering" parent="." unique_id=1882781362 instance=ExtResource("4_3dryh")]
-position = Vector2(58.333336, 97)
-autoplay = "bubble6"
-
 [node name="bubbloranimering2" parent="." unique_id=587869133 instance=ExtResource("4_3dryh")]
-position = Vector2(145.33334, 161.66666)
+position = Vector2(131, 158.33333)
 animation = &"bubble5"
 autoplay = "bubble5"
 
-[node name="bubbloranimering3" parent="." unique_id=755959288 instance=ExtResource("4_3dryh")]
-position = Vector2(77.333336, 82.33333)
-animation = &"bubble4"
-autoplay = "bubble4"
+[node name="bubbloranimering8" parent="." unique_id=1882781362 instance=ExtResource("4_3dryh")]
+position = Vector2(50.66666, 107.33334)
+scale = Vector2(1.5, 1.5)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering3" parent="." unique_id=1588405199 instance=ExtResource("4_3dryh")]
+position = Vector2(240, -10.333)
+scale = Vector2(2, 2)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering6" parent="." unique_id=1641591727 instance=ExtResource("4_3dryh")]
+position = Vector2(245.33333, 38)
+scale = Vector2(1.5, 1.5)
+animation = &"bubble5"
+autoplay = "bubble5"
 
 [node name="bubbloranimering4" parent="." unique_id=2026067309 instance=ExtResource("4_3dryh")]
-position = Vector2(269.3333, 140)
+position = Vector2(255, 38)
+scale = Vector2(0.5, 0.5)
 animation = &"bubbla3"
 autoplay = "bubbla3"
 
-[node name="bubbloranimering5" parent="." unique_id=1079064043 instance=ExtResource("4_3dryh")]
-position = Vector2(197, 83)
-animation = &"bubbla2"
-autoplay = "bubbla2"
+[node name="bubbloranimering5" parent="." unique_id=1258362174 instance=ExtResource("4_3dryh")]
+position = Vector2(-34.333336, 126.666664)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering7" parent="." unique_id=2052989273 instance=ExtResource("4_3dryh")]
+position = Vector2(18.333334, 137)
+scale = Vector2(2, 2)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering9" parent="." unique_id=542658477 instance=ExtResource("4_3dryh")]
+position = Vector2(129.33333, 210.33334)
+scale = Vector2(2, 2)
+animation = &"bubbla3"
+autoplay = "bubbla3"
 
 [connection signal="timeout" from="TimerTimer" to="." method="_on_timer_timer_timeout"]
