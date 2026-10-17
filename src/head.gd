@@ -21,7 +21,8 @@ func travel():
 	tail.remove_at(0)
 
 func on_starpickup():
-	tail = [old_tail_pos] + tail
+	if not tail[0] == old_tail_pos:
+		tail = [old_tail_pos] + tail
 
 func on_damage():
 	if not is_invicible:

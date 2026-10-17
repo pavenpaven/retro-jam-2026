@@ -30,8 +30,6 @@ func _ready():
 			map_content_sprites[Vector2(i,j)] = ani
 			add_child(ani)
 			
-
-			
 			# Death to america
 			# UVS är en terrororganisation
 
@@ -46,10 +44,15 @@ func tile_sheet(tile):
 		   ,"rock": "rock"
 		   ,"fire": "fire"
 		   ,"target":"target"
-		   ,"star": "star"}[tile["type"]]
+		   ,"star": "star"
+		   ,"eelbaby":"eelbaby"}[tile["type"]]
 
 
-func allowed(pos):		
+func allowed(pos):
+	if pos.y < 0 or pos.y >= 8: return false
+	if (pos.y + 2*pos.x) < 1 : return false
+	if (pos.y + 2*pos.x) >= 24: return false
+	
 	return not map[pos]["type"] in ["rock"]
 
 func on_tick():
@@ -61,6 +64,12 @@ func on_tick():
 	for i in head.tail + [head.map_cords]:
 		if map[i]["type"] in ["fire"]:
 			head.on_damage()
+
+		if map[i]["type"] == "eelbaby":
+			map[i] = {"type": "empty"}
+			Globals.score += 1
+			print(Globals.score)
+			
 
 		
 
@@ -75,6 +84,7 @@ func orientation(v):
 
 func _process(dt):
 	on_tick()
+	
 	var n = 0
 
 	if len(tail_segs) > len(head.tail):
@@ -126,12 +136,33 @@ func _process(dt):
 		map_content_sprites[k].animation = tile_sheet(map[k])
 		map_content_sprites[k].play()
 
-	print(numfire / (20*10))
+	handle_eel_baby()
 	if numfire / (20*10) < (1 - prop):
 		spawn()
 		
+func handle_eel_baby():
+	var eel_baby_exists = false
+	for k in map_sprites:
+		if map[k]["type"] == "eelbaby":
+			eel_baby_exists = true
 
-
+	if not eel_baby_exists:
+		var vec = random_position()
+		map[vec] = {"type": "eelbaby"}
+		
+		
+func random_position():
+	var vec
+	while true:
+		var x = (randi() % 20) - 5
+		var y = (randi() % 10)
+		vec = Vector2(x, y)
+		if allowed(vec):
+			break
+	if map[vec]["type"] == "empty":
+		return vec
+	return random_position()
+			
 func spawn():
 	var x = (randi() % 20) - 5
 	var y = (randi() % 10)

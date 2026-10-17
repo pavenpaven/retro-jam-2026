@@ -4,6 +4,7 @@ var tile_tex
 var head_tex  = []
 var body_tex  = []
 var tails_tex = []
+var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +20,6 @@ func _ready() -> void:
 
 var sidelength = 32
 func to_real_cords(cords):
-	var a = (cords.y * Vector2(1, sqrt(3))/2) * sidelength
+	var a = (cords.y * Vector2(1, sqrt(3))/2 + Vector2(0, 0.35)) * sidelength
 	var b = (cords.x * Vector2(1, 0)) * sidelength
 	return (a + b)
