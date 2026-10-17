@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dgbn6c5h526vv"]
+
+[ext_resource type="Texture2D" uid="uid://miken7nk22d7" path="res://Assets/Images/seagull.PNG" id="1_hghv2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(132, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afpow"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_287tu"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(33, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0830c"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(66, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(99, 0, 33, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7kbpi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f0kj")
+}],
+"loop": 1,
+"name": &"seagulldie",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afpow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_287tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0830c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghaa6")
+}],
+"loop": 1,
+"name": &"seagullfly",
+"speed": 5.0
+}]
+
+[node name="enemy" type="Node2D" unique_id=2135361342]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=990975987]
+sprite_frames = SubResource("SpriteFrames_7kbpi")
+animation = &"seagulldie"
