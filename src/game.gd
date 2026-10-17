@@ -54,12 +54,14 @@ func allowed(pos):
 
 func on_tick():
 	for i in head.tail + [head.map_cords]:
-		if map[i]["type"] in ["fire"]:
-			head.on_damage()
-
 		if map[i]["type"] in ["star"]:
 			head.on_starpickup()
 			map[i]["type"] = "empty"
+			
+	for i in head.tail + [head.map_cords]:
+		if map[i]["type"] in ["fire"]:
+			head.on_damage()
+
 		
 
 func orientation(v):
@@ -91,6 +93,7 @@ func _process(dt):
 			tail_segs[n].position = Globals.to_real_cords(i)
 			if n == 1:
 				var vec = head.tail[0] - i
+				print(vec)
 				var ind = [3,2,4,5,0,1][orientation(vec)]
 				tail_segs[0].texture = Globals.tails_tex[ind]
 			if n < len(head.tail) - 1:
