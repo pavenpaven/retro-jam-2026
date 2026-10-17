@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bp850h6haii6f" path="res://src/game.gd" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://c55fgckbh8cs" path="res://Scenes/head.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://ip05t8nxuk74" path="res://Assets/Images/background.PNG" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://di764hfdjs2py" path="res://Scenes/bubbloranimering.tscn" id="4_3dryh"]
 
 [node name="Game" type="Node2D" unique_id=288948182]
 scale = Vector2(3, 3)
@@ -12,5 +14,34 @@ position = Vector2(284, 107.00003)
 
 [node name="TimerTimer" type="Timer" parent="." unique_id=754660148]
 autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730263626]
+position = Vector2(192.41667, 108)
+scale = Vector2(1.1957425, 1.1145834)
+texture = ExtResource("3_wrm1d")
+
+[node name="bubbloranimering" parent="." unique_id=1882781362 instance=ExtResource("4_3dryh")]
+position = Vector2(58.333336, 97)
+autoplay = "bubble6"
+
+[node name="bubbloranimering2" parent="." unique_id=587869133 instance=ExtResource("4_3dryh")]
+position = Vector2(145.33334, 161.66666)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering3" parent="." unique_id=755959288 instance=ExtResource("4_3dryh")]
+position = Vector2(77.333336, 82.33333)
+animation = &"bubble4"
+autoplay = "bubble4"
+
+[node name="bubbloranimering4" parent="." unique_id=2026067309 instance=ExtResource("4_3dryh")]
+position = Vector2(269.3333, 140)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering5" parent="." unique_id=1079064043 instance=ExtResource("4_3dryh")]
+position = Vector2(197, 83)
+animation = &"bubbla2"
+autoplay = "bubbla2"
 
 [connection signal="timeout" from="TimerTimer" to="." method="_on_timer_timer_timeout"]
