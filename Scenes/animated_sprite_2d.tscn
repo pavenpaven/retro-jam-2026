@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1f36i0tcq1do" path="res://Assets/Images/nothing.PNG" id="4_r3knd"]
 [ext_resource type="Texture2D" uid="uid://dj46u5dpaaoww" path="res://Assets/Images/starsprite.PNG" id="6_j6oam"]
 [ext_resource type="Texture2D" uid="uid://dnq20wkh8se2j" path="res://Assets/Images/starrise.PNG" id="7_hlrca"]
+[ext_resource type="Texture2D" uid="uid://cpqbgu7s0j08e" path="res://Assets/Images/target.PNG" id="8_hlrca"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlrca"]
 atlas = ExtResource("1_318so")
@@ -71,6 +72,10 @@ region = Rect2(33, 0, 33, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd2go"]
 atlas = ExtResource("7_hlrca")
 region = Rect2(0, 37, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfcoy"]
+atlas = ExtResource("8_hlrca")
+region = Rect2(0, 0, 33, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pv606"]
 animations = [{
@@ -156,8 +161,16 @@ animations = [{
 "loop": 1,
 "name": &"starrise",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfcoy")
+}],
+"loop": 1,
+"name": &"target",
+"speed": 5.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]
 sprite_frames = SubResource("SpriteFrames_pv606")
-animation = &"starrise"
+animation = &"target"
