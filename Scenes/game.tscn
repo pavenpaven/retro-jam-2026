@@ -10,7 +10,7 @@ script = ExtResource("1_80nbo")
 [node name="Head" parent="." unique_id=113268613 instance=ExtResource("2_e2o6t")]
 position = Vector2(284, 107.00003)
 
-[node name="Timer" type="Timer" parent="." unique_id=1343515289]
+[node name="TimerTimer" type="Timer" parent="." unique_id=754660148]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerTimer" to="." method="_on_timer_timer_timeout"]

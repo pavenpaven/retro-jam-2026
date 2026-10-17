@@ -4,3 +4,9 @@
 
 [node name="Head" type="Node2D" unique_id=113268613]
 script = ExtResource("1_hukeq")
+
+[node name="Invincibility" type="Timer" parent="." unique_id=1280395827]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]

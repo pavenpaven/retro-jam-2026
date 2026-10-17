@@ -1,7 +1,9 @@
 extends Node2D
 
+@onready var invictimer = $Invincibility
+var is_invicible = false
 var map_cords = Vector2(5,5)
-var tail      = [Vector2(1,2),Vector2(2,2),Vector2(2,3),Vector2(3,3), Vector2(3,4), Vector2(4,4),Vector2(5,4)]
+var tail      = [Vector2(3,2),Vector2(3,3), Vector2(3,4), Vector2(4,4),Vector2(5,4)]
 
 var old_tail_pos = tail[0]
 
@@ -22,7 +24,11 @@ func on_starpickup():
 	tail = [old_tail_pos] + tail
 
 func on_damage():
-	tail.remove_at(0)
+	if not is_invicible:
+		tail.remove_at(0)
+		is_invicible = true
+		invictimer.start()
+		
 	
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -44,5 +50,7 @@ func _input(event):
 			old_tail_pos = tail[0]
 			travel()
 			map_cords = new_pos
-			get_parent().on_tick()
 			
+
+func _on_invincibility_timeout() -> void:
+	is_invicible = false

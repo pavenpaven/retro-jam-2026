@@ -1,11 +1,12 @@
 extends Node2D
 
 @onready var head = $Head
-@onready var timer = $Timer
 var map = {}
 var map_sprites = {}
 var map_content_sprites = {}
 var tail_segs = []
+
+var prop = 1.0
 
 func _ready():
 	var anim = load("res://Scenes/animated_sprite_2d.tscn")
@@ -73,6 +74,7 @@ func orientation(v):
 	return ind
 
 func _process(dt):
+	on_tick()
 	var n = 0
 
 	if len(tail_segs) > len(head.tail):
@@ -105,26 +107,40 @@ func _process(dt):
 				
 		n+=1
 
+	var numfire = 0.0
 	for k in map_sprites:
 		if map[k]["type"] == "fire":
+			numfire+=1
 			map[k]["timer"] -= dt
 			if map[k]["timer"] <= 0:
 				map[k] = {"type": "empty"}
 				
+				
 		if map[k]["type"] == "target":
+			numfire+=1
 			map[k]["timer"] -= dt
 			if map[k]["timer"] <= 0:
 				map[k] = {"type": "fire", "timer": 6}
+				
 		
 		map_content_sprites[k].animation = tile_sheet(map[k])
 		map_content_sprites[k].play()
+
+	print(numfire / (20*10))
+	if numfire / (20*10) < (1 - prop):
+		spawn()
 		
 
 
-func _on_timer_timeout() -> void:
+func spawn():
 	var x = (randi() % 20) - 5
 	var y = (randi() % 10)
 	var vec = Vector2(x,y)
 	if map[vec]["type"] == "empty":
 		map[vec] = {"type": "target", "timer": 3}
-		timer.wait_time *= 0.95
+		
+
+func _on_timer_timer_timeout() -> void:
+	prop = prop * (1 - 0.01)
+
+	
