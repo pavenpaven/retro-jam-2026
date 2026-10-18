@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bfyft1eijlogq" path="res://Assets/Images/newstarsprite.PNG" id="8_7nlh7"]
 [ext_resource type="Texture2D" uid="uid://cpqbgu7s0j08e" path="res://Assets/Images/target.PNG" id="8_hlrca"]
 [ext_resource type="Texture2D" uid="uid://b7om0duswplli" path="res://Assets/Images/newstarrise.PNG" id="9_6ah1d"]
+[ext_resource type="Texture2D" uid="uid://cgchgfe16kijx" path="res://Assets/Images/target_change.PNG" id="11_6ah1d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o21fk"]
 atlas = ExtResource("1_g5jxn")
@@ -98,6 +99,26 @@ region = Rect2(0, 37, 33, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yfcoy"]
 atlas = ExtResource("8_hlrca")
 region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cc1s"]
+atlas = ExtResource("11_6ah1d")
+region = Rect2(0, 0, 66, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nmsc"]
+atlas = ExtResource("11_6ah1d")
+region = Rect2(66, 0, 66, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eofin"]
+atlas = ExtResource("11_6ah1d")
+region = Rect2(0, 74, 66, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gu7r"]
+atlas = ExtResource("11_6ah1d")
+region = Rect2(66, 74, 66, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m5ed"]
+atlas = ExtResource("11_6ah1d")
+region = Rect2(0, 148, 66, 74)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pv606"]
 animations = [{
@@ -216,8 +237,30 @@ animations = [{
 "loop": 1,
 "name": &"target",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cc1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nmsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eofin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gu7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m5ed")
+}],
+"loop": 1,
+"name": &"targetchange",
+"speed": 5.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]
 sprite_frames = SubResource("SpriteFrames_pv606")
-animation = &"hole"
+animation = &"targetchange"
+frame = 1
+frame_progress = 0.49425173
