@@ -7,6 +7,7 @@ var map_content_sprites = {}
 var tail_segs = []
 var enemies = []
 @export var does_fire_extinguish_on_contact = true
+var enemy_scene
 
 
 var prop = 1.0
@@ -18,9 +19,6 @@ func _ready():
 			map[Vector2(i,j)] = {"type": "empty"}
 			if randi() % 10 == 0:
 				map[Vector2(i,j)] = {"type": "rock"}
-
-			if randi() % 10 == 0:
-				map[Vector2(i,j)] = {"type": "star"}
 
 			var sprite = Sprite2D.new()
 			map_sprites[Vector2(i,j)] = sprite
@@ -42,7 +40,7 @@ func _ready():
 		sprite.texture = Globals.tails_tex[0]
 		add_child(sprite)
 
-	var enemy_scene = load("res://Scenes/enemy.tscn")
+	enemy_scene = load("res://Scenes/enemy.tscn")
 	var enemy = enemy_scene.instantiate()
 	enemy.map_cords = Vector2(1,1)
 	enemy.attack.connect(head.on_enemy_touch)
@@ -194,9 +192,25 @@ func spawn():
 		
 
 func _on_timer_timer_timeout() -> void:
-	prop = prop * (1 - 0.01)
+	prop = prop * (1 - 0.005)
 
 	
 func _on_enemy_tick_timeout() -> void:
 	for i in enemies:
 		i.on_tick(head)
+
+
+func _on_starspawn_timeout() -> void:
+	var pos = random_position()
+	map[pos] = {"type": "star"}
+
+
+func _on_seagull_timeout() -> void:
+	var pos = random_position()
+	print("spawn seagull")
+	var enemy = enemy_scene.instantiate()
+	enemy.map_cords = pos
+	enemy.attack.connect(head.on_enemy_touch)
+	enemy.is_shark = false
+	enemies.append(enemy)
+	add_child(enemy)

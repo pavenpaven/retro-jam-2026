@@ -8,15 +8,15 @@ var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	tile_tex = load("Assets/Images/empty_hexagon.PNG")
+	tile_tex = load("res://Assets/Images/empty_hexagon.PNG")
 	for i in range(1,7):
-		head_tex.append(load("Assets/Images/eel/eelhead" + str(i) + ".PNG"))
+		head_tex.append(load("res://Assets/Images/eel/eelhead" + str(i) + ".PNG"))
 
 	for i in range(1,7):
-		body_tex.append(load("Assets/Images/eel/eelbody" + str(i) + ".PNG"))
+		body_tex.append(load("res://Assets/Images/eel/eelbody" + str(i) + ".PNG"))
 		
 	for i in range(1,7):
-		tails_tex.append(load("Assets/Images/eel/eeltail" + str(i) + ".PNG"))
+		tails_tex.append(load("res://Assets/Images/eel/eeltail" + str(i) + ".PNG"))
 
 var sidelength = 32
 func to_real_cords(cords):
