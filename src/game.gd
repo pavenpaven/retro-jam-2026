@@ -174,7 +174,14 @@ func _process(dt):
 		tail_segs.append(sprite)
 		sprite.texture = Globals.tails_tex[0]
 		add_child(sprite)
-	
+
+	if len(head.tail) < 2:
+		queue_free()
+		get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
+		print("dead")
+		return
+		
+		
 	for i in head.tail: ## could update less often
 		if n==0:
 			tail_segs[0].position = Globals.to_real_cords(head.tail[1])

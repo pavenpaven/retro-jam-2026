@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://cw6we1bdipnh5"]
+
+[ext_resource type="Script" uid="uid://cjqnbf3r8xllo" path="res://src/gameover.gd" id="1_6kwjr"]
+[ext_resource type="Texture2D" uid="uid://ip05t8nxuk74" path="res://Assets/Images/background.PNG" id="2_qjy16"]
+[ext_resource type="Texture2D" uid="uid://dgr33mhx5ekwl" path="res://Assets/Images/buttonbackground.PNG" id="4_6kwjr"]
+[ext_resource type="PackedScene" uid="uid://di764hfdjs2py" path="res://Scenes/bubbloranimering.tscn" id="4_vskwr"]
+[ext_resource type="Texture2D" uid="uid://c0nsi0eiw8l6k" path="res://Assets/Images/buttonbackgroundpushed.PNG" id="5_bb3cs"]
+
+[node name="Gameover" type="Node2D" unique_id=288948182]
+scale = Vector2(2.8, 2.8)
+script = ExtResource("1_6kwjr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730263626]
+position = Vector2(197.24136, 111.3793)
+scale = Vector2(1.3513805, 1.3038793)
+texture = ExtResource("2_qjy16")
+
+[node name="bubbloranimering2" parent="." unique_id=587869133 instance=ExtResource("4_vskwr")]
+position = Vector2(131, 158.33333)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering8" parent="." unique_id=1882781362 instance=ExtResource("4_vskwr")]
+position = Vector2(50.66666, 107.33334)
+scale = Vector2(1.5, 1.5)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering3" parent="." unique_id=1588405199 instance=ExtResource("4_vskwr")]
+position = Vector2(240, -10.333)
+scale = Vector2(2, 2)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering6" parent="." unique_id=1641591727 instance=ExtResource("4_vskwr")]
+position = Vector2(245.33333, 38)
+scale = Vector2(1.5, 1.5)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering4" parent="." unique_id=2026067309 instance=ExtResource("4_vskwr")]
+position = Vector2(255, 38)
+scale = Vector2(0.5, 0.5)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering5" parent="." unique_id=1258362174 instance=ExtResource("4_vskwr")]
+position = Vector2(-34.333336, 126.666664)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering7" parent="." unique_id=2052989273 instance=ExtResource("4_vskwr")]
+position = Vector2(18.333334, 137)
+scale = Vector2(2, 2)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="bubbloranimering9" parent="." unique_id=542658477 instance=ExtResource("4_vskwr")]
+position = Vector2(130, 213.92857)
+scale = Vector2(2, 2)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
+[node name="Button" type="Button" parent="." unique_id=2056403879]
+offset_left = 147.14287
+offset_top = 83.57143
+offset_right = 247.85716
+offset_bottom = 143.92857
+
+[node name="ButtonTexPressed" type="Sprite2D" parent="." unique_id=1629053984]
+position = Vector2(197.32141, 114.2857)
+scale = Vector2(1.5313853, 0.83011574)
+texture = ExtResource("5_bb3cs")
+
+[node name="ButtonTexUnpressed" type="Sprite2D" parent="." unique_id=733053629]
+position = Vector2(197.39285, 114.10714)
+scale = Vector2(1.5292212, 0.82528967)
+texture = ExtResource("4_6kwjr")
+
+[node name="Label" type="Label" parent="." unique_id=281055755]
+offset_left = 163.92857
+offset_top = 40.357143
+offset_right = 224.92857
+offset_bottom = 63.357143
+text = "Score: 0"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
