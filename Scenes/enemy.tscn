@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://miken7nk22d7" path="res://Assets/Images/seagull.PNG" id="1_hghv2"]
 [ext_resource type="Texture2D" uid="uid://dsi5e77si8hdy" path="res://Assets/Images/seagullattack.PNG" id="2_287tu"]
 [ext_resource type="Texture2D" uid="uid://d3mqic546nsx4" path="res://Assets/Images/sharksprite.PNG" id="3_afpow"]
+[ext_resource type="AudioStream" uid="uid://b4yawj52i8qo" path="res://Assets/Sound/fiskmas.mp3" id="5_ghaa6"]
+[ext_resource type="AudioStream" uid="uid://dnhnpl40rx1bu" path="res://Assets/Sound/sharkattack.mp3" id="6_1dp5w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
 atlas = ExtResource("2_287tu")
@@ -103,5 +105,12 @@ script = ExtResource("1_1f0kj")
 sprite_frames = SubResource("SpriteFrames_7kbpi")
 animation = &"seagullattack"
 autoplay = "seagullfly"
+
+[node name="seagullattack" type="AudioStreamPlayer" parent="." unique_id=650114114]
+stream = ExtResource("5_ghaa6")
+
+[node name="sharkattack" type="AudioStreamPlayer" parent="." unique_id=1318151224]
+stream = ExtResource("6_1dp5w")
+volume_db = -8.211
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://c55fgckbh8cs"]
 
 [ext_resource type="Script" uid="uid://tuybcjhryl6f" path="res://src/head.gd" id="1_hukeq"]
+[ext_resource type="AudioStream" uid="uid://cg6jl24cycsen" path="res://Assets/Sound/eel_hurt.mp3" id="2_x4cii"]
+[ext_resource type="AudioStream" uid="uid://cehiw1c4s1813" path="res://Assets/Sound/starsfx.mp3" id="3_nfxfi"]
 
 [node name="Head" type="Node2D" unique_id=113268613]
 script = ExtResource("1_hukeq")
@@ -8,5 +10,13 @@ script = ExtResource("1_hukeq")
 [node name="Invincibility" type="Timer" parent="." unique_id=1280395827]
 wait_time = 0.5
 one_shot = true
+
+[node name="eelhurt" type="AudioStreamPlayer" parent="." unique_id=1336849197]
+stream = ExtResource("2_x4cii")
+volume_db = 1.368
+
+[node name="starsfx" type="AudioStreamPlayer" parent="." unique_id=1218512368]
+stream = ExtResource("3_nfxfi")
+volume_db = -1.825
 
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]
