@@ -112,10 +112,6 @@ region = Rect2(66, 0, 66, 74)
 atlas = ExtResource("11_6ah1d")
 region = Rect2(0, 74, 66, 74)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gu7r"]
-atlas = ExtResource("11_6ah1d")
-region = Rect2(66, 74, 66, 74)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1m5ed"]
 atlas = ExtResource("11_6ah1d")
 region = Rect2(0, 148, 66, 74)
@@ -249,14 +245,11 @@ animations = [{
 "texture": SubResource("AtlasTexture_eofin")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4gu7r")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_1m5ed")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"targetchange",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]

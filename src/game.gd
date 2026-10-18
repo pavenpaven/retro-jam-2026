@@ -3,6 +3,7 @@ extends Node2D
 @onready var head = $Head
 @onready var firesfx = $eldsfx
 @onready var enemytick = $EnemyTick
+@onready var seagulltimer = $Seagull
 
 var enemy_extra_tick = 1.0
 
@@ -13,6 +14,14 @@ var tail_segs = []
 var enemies = []
 @export var does_fire_extinguish_on_contact = true
 @export var do_play_fire_sound  = true
+@export var fire_rate_of_change = 0.005
+@export var target_duration = 2.0
+@export var fire_duration = 3.0
+@export var num_segments = 2
+@export var num_rocks = 10
+@export var enemy_tick_upper = 2.0
+@export var enemy_tick_lower = 1.0
+@export var enemy_tick_transition = 0.95
 var enemy_scene
 
 var directions = [Vector2(0,-1), Vector2(1, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 1), Vector2(-1, 0)]
@@ -38,11 +47,11 @@ func _ready():
 			
 			# Death to america
 			# UVS är en terrororganisation
-	for i in range(10):
+	for i in range(num_rocks):
 		map[random_position()] = {"type": "rock"}
-			
-	random_seg()
-	random_seg()
+
+	for i in range(num_segments):
+		random_seg()
 
 	for i in head.tail + [head.map_cords]: 
 		map[i] = {"type": "empty"}
@@ -68,12 +77,7 @@ func _ready():
 		add_child(sprite)
 
 	enemy_scene = load("res://Scenes/enemy.tscn")
-	var enemy = enemy_scene.instantiate()
-	enemy.map_cords = Vector2(1,1)
-	enemy.attack.connect(head.on_enemy_touch)
-	enemies.append(enemy)
-	enemy.is_shark = true
-	add_child(enemy)
+
 
 func random_seg():
 	var vec = random_position()
@@ -108,7 +112,7 @@ func tile_sheet(tile):
 	return {"empty": "nothing"
 		   ,"rock": "rock"
 		   ,"fire": "fire"
-		   ,"target":"target"
+		   ,"target":"targetchange"
 		   ,"star": "star"
 		   ,"eelbaby":"eelbaby"
 		   ,"sand":"sand"}[tile["type"]]
@@ -229,7 +233,7 @@ func _process(dt):
 			numfire+=1
 			map[k]["timer"] -= dt
 			if map[k]["timer"] <= 0:
-				map[k] = {"type": "fire", "timer": 4}
+				map[k] = {"type": "fire", "timer": fire_duration}
 				
 		
 		map_content_sprites[k].animation = tile_sheet(map[k])
@@ -239,6 +243,18 @@ func _process(dt):
 	if numfire / (20*10) < (1 - prop):
 		spawn()
 
+
+func spawn_unblocked(tile):
+	var vec = random_position()
+	var num_blocked = 0
+	for i in directions:
+		num_blocked += int(map[vec + i]["type"] in ["rock", "sand"])
+	if num_blocked > 2:
+		spawn_unblocked(tile)
+		return
+	map[vec] = tile
+
+		
 func handle_eel_baby():
 	var eel_baby_exists = false
 	for k in map_sprites:
@@ -246,14 +262,7 @@ func handle_eel_baby():
 			eel_baby_exists = true
 
 	if not eel_baby_exists:
-		var vec = random_position()
-		var num_blocked = 0
-		for i in directions:
-			num_blocked += int(map[vec + i]["type"] in ["rock", "sand"])
-		if num_blocked > 2:
-			handle_eel_baby()
-			return
-		map[vec] = {"type": "eelbaby"}
+		spawn_unblocked({"type": "eelbaby"})
 		
 		
 func random_position():
@@ -273,13 +282,13 @@ func spawn():
 	var y = (randi() % 10)
 	var vec = Vector2(x,y)
 	if map[vec]["type"] == "empty":
-		map[vec] = {"type": "target", "timer": 3}
+		map[vec] = {"type": "target", "timer": target_duration}
 		
 
 func _on_timer_timer_timeout() -> void:
-	prop = prop * (1 - 0.005)
-	enemy_extra_tick *= 0.95
-	enemytick.wait_time = enemy_extra_tick + 1
+	prop = prop * (1 - fire_rate_of_change)
+	enemy_extra_tick *= enemy_tick_transition
+	enemytick.wait_time = enemy_extra_tick*(enemy_tick_upper - enemy_tick_lower) + enemy_tick_lower
 	
 
 	
@@ -289,8 +298,7 @@ func _on_enemy_tick_timeout() -> void:
 
 
 func _on_starspawn_timeout() -> void:
-	var pos = random_position()
-	map[pos] = {"type": "star", "timer": 0.3}
+	spawn_unblocked({"type": "star", "timer": 0.3})
 
 
 func _on_seagull_timeout() -> void:
@@ -301,3 +309,17 @@ func _on_seagull_timeout() -> void:
 	enemy.is_shark = false
 	enemies.append(enemy)
 	add_child(enemy)
+
+
+func _on_shark_timer_timeout() -> void:
+	seagulltimer.start()
+	var pos = random_position()
+	
+	var enemy = enemy_scene.instantiate()
+	enemy.map_cords = pos
+	enemy.attack.connect(head.on_enemy_touch)
+	enemies.append(enemy)
+	enemy.is_shark = true
+	add_child(enemy)
+	
+	
