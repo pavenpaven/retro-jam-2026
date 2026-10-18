@@ -73,11 +73,11 @@ autoplay = "bubbla3"
 autostart = true
 
 [node name="Starspawn" type="Timer" parent="." unique_id=1233903884]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="Seagull" type="Timer" parent="." unique_id=603043593]
-wait_time = 10.0
+wait_time = 20.0
 autostart = true
 
 [node name="bgm" type="AudioStreamPlayer" parent="." unique_id=1019561144]

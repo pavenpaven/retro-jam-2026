@@ -38,7 +38,7 @@ func _ready():
 			
 			# Death to america
 			# UVS är en terrororganisation
-	for i in range(17):
+	for i in range(10):
 		map[random_position()] = {"type": "rock"}
 			
 	random_seg()
