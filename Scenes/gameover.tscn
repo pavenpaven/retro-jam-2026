@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://di764hfdjs2py" path="res://Scenes/bubbloranimering.tscn" id="4_vskwr"]
 [ext_resource type="Texture2D" uid="uid://c0nsi0eiw8l6k" path="res://Assets/Images/buttonbackgroundpushed.PNG" id="5_bb3cs"]
 [ext_resource type="FontFile" uid="uid://ddo4jdbrjf7ku" path="res://Assets/m3x6.ttf" id="6_bb3cs"]
+[ext_resource type="AudioStream" uid="uid://bljyby52p8hyh" path="res://Assets/Sound/sadeelmusicgood.mp3" id="7_a57xw"]
 
 [node name="Gameover" type="Node2D" unique_id=288948182]
 scale = Vector2(2.8, 2.8)
@@ -115,6 +116,7 @@ theme_override_font_sizes/font_size = 90
 text = "Score: 0"
 
 [node name="Label2" type="Label" parent="." unique_id=217797176]
+texture_filter = 1
 offset_left = 45.357143
 offset_top = -26.428574
 offset_right = 370.35715
@@ -123,8 +125,13 @@ theme_override_colors/font_shadow_color = Color(0.17600003, 0.1968, 0.8, 0.56470
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("6_bb3cs")
-theme_override_font_sizes/font_size = 133
+theme_override_font_sizes/font_size = 128
 text = "GAME OVER"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=425459766]
+stream = ExtResource("7_a57xw")
+volume_db = -9.123
+autoplay = true
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
