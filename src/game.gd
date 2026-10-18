@@ -47,6 +47,7 @@ func _ready():
 	enemy.map_cords = Vector2(1,1)
 	enemy.attack.connect(head.on_enemy_touch)
 	enemies.append(enemy)
+	enemy.is_shark = true
 	add_child(enemy)
 
 func tile_sheet(tile):
@@ -58,7 +59,7 @@ func tile_sheet(tile):
 		   ,"eelbaby":"eelbaby"}[tile["type"]]
 
 
-func allowed(pos):
+func allowed(pos, allow_player = false):
 	if pos.y < 0 or pos.y >= 8: return false
 	if (pos.y + 2*pos.x) < 1 : return false
 	if (pos.y + 2*pos.x) >= 24: return false
@@ -66,10 +67,10 @@ func allowed(pos):
 	for i in enemies:
 		if i.map_cords == pos:
 			return false
-		
-	for i in head.tail.slice(1) + [head.map_cords]:
-		if i == pos:
-			return false
+	if not allow_player:
+		for i in head.tail.slice(1) + [head.map_cords]:
+			if i == pos:
+				return false
 	
 	return not map[pos]["type"] in ["rock"]
 
