@@ -4,6 +4,7 @@ extends Node2D
 @onready var eelhurtdelay = $EelHurtDelay
 @onready var eelhurtsfx = $eelhurt
 @onready var starsfx    = $starsfx
+@onready var eelbabysfx = $eelbebis
 
 var is_invicible = false
 var map_cords = Vector2(5,5)
