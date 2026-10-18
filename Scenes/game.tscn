@@ -11,6 +11,7 @@
 [node name="Game" type="Node2D" unique_id=288948182]
 scale = Vector2(2.8, 2.8)
 script = ExtResource("1_80nbo")
+fire_rate_of_change = 0.003
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730263626]
 position = Vector2(197.24136, 111.3793)
