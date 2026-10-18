@@ -39,7 +39,13 @@ func on_damage():
 
 func on_enemy_touch():
 	on_damage()
-		
+
+func try_walk(dir):
+	var new_pos = map_cords + dir
+	if not new_pos in tail.slice(1) and not dir == Vector2(0,0) and get_parent().allowed(new_pos):
+		old_tail_pos = tail[0]
+		travel()
+		map_cords = new_pos
 	
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -56,11 +62,7 @@ func _input(event):
 			vec = Vector2(-1, 1)
 		if event.keycode in [KEY_A, KEY_H]:
 			vec = Vector2(-1, 0)
-		var new_pos = map_cords + vec
-		if not new_pos in tail.slice(1) and not vec == Vector2(0,0) and get_parent().allowed(new_pos):
-			old_tail_pos = tail[0]
-			travel()
-			map_cords = new_pos
+		
 			
 
 func _on_invincibility_timeout() -> void:

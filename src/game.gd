@@ -164,8 +164,28 @@ func orientation(v):
 		n+=1
 	return ind
 
+func input():
+	if Input.is_mouse_button_pressed(1):
+		var vec = get_viewport().get_mouse_position()/Vector2(2.8,2.8) + Vector2(0.5,0.5)*Vector2(Globals.sidelength, Globals.sidelength)
+		var v = (vec - head.position)
+		print(v)
+		var min_distance = 10000
+		var best_dir
+		for i in directions + [Vector2(0,0)]:
+			var w = Globals.to_real_cords(i)
+			if (v - w).length() < min_distance:
+				best_dir = i
+				min_distance = (v-w).length()
+				
+		head.try_walk(best_dir)
+		
+				
+	
+
 func _process(dt):
 	on_tick()
+
+	input()
 	
 	var n = 0
 
