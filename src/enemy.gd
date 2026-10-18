@@ -5,7 +5,10 @@ var map_cords
 var id
 var dead = false
 var is_shark = false
+
 @onready var anim = $AnimatedSprite2D
+@onready var seagullattacksfx = $seagullattack
+@onready var sharkattacksfx = $sharkattack
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +55,10 @@ func on_tick(head):
 			attack.emit()
 			if is_shark:
 				anim.play("sharkattack")
+				sharkattacksfx.play()
+			else:
+				anim.play("seagullattack")
+				seagullattacksfx.play()
 		else:
 			map_cords += best_move
 
@@ -60,6 +67,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if is_shark:
 		anim.play("shark")
 	else:
+		print(anim.animation)
+		if anim.animation == "seagullattack":
+			anim.play("seagullfly")
+			return
+			
 		var ind
 		var n = 0
 		for i in get_parent().enemies:

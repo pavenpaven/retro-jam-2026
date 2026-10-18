@@ -1,12 +1,15 @@
 extends Node2D
 
 @onready var head = $Head
+@onready var firesfx = $eldsfx
+
 var map = {}
 var map_sprites = {}
 var map_content_sprites = {}
 var tail_segs = []
 var enemies = []
 @export var does_fire_extinguish_on_contact = true
+@export var do_play_fire_sound  = true
 var enemy_scene
 
 
@@ -72,8 +75,8 @@ func tile_sheet(tile):
 
 
 func allowed(pos, allow_player = false):
-	if pos.y < 0 or pos.y >= 8: return false
-	if (pos.y + 2*pos.x) < 1 : return false
+	if pos.y < 0 or pos.y > 8: return false
+	if (pos.y + 2*pos.x) < 0 : return false
 	if (pos.y + 2*pos.x) >= 24: return false
 
 	for i in enemies:
@@ -97,6 +100,8 @@ func on_tick():
 			head.on_damage()
 			if does_fire_extinguish_on_contact:
 				map[i] = {"type": "empty"}
+				if do_play_fire_sound:
+					firesfx.play()
 
 		if map[i]["type"] == "eelbaby":
 			map[i] = {"type": "empty"}
@@ -135,18 +140,29 @@ func _process(dt):
 			tail_segs[0].position = Globals.to_real_cords(head.tail[1])
 		if n > 0:
 			tail_segs[n].position = Globals.to_real_cords(i)
+			var invicible = head.is_invicible
 			if n == 1:
 				var vec = head.tail[0] - i
 				var ind = [3,2,4,5,0,1][orientation(vec)]
-				tail_segs[0].texture = Globals.tails_tex[ind]
+				if invicible:
+					tail_segs[0].texture = Globals.red_tails_tex[ind]
+				else:
+					tail_segs[0].texture = Globals.tails_tex[ind]
+					
 			if n < len(head.tail) - 1:
 				var vec = head.tail[n+1] - i
 				var ind = [4,1,0,2,3,5][orientation(vec)]
-				tail_segs[n].texture = Globals.body_tex[ind]
+				if invicible:
+					tail_segs[n].texture = Globals.red_body_tex[ind]
+				else:
+					tail_segs[n].texture = Globals.body_tex[ind]
 			else:
 				var vec = head.map_cords - i
 				var ind = [0,1,5,2,3,4][orientation(vec)]
-				tail_segs[n].texture = Globals.head_tex[ind]
+				if invicible:
+					tail_segs[n].texture = Globals.red_head_tex[ind]
+				else:
+					tail_segs[n].texture = Globals.head_tex[ind]
 				
 		n+=1
 
@@ -175,7 +191,6 @@ func _process(dt):
 	handle_eel_baby()
 	if numfire / (20*10) < (1 - prop):
 		spawn()
-
 
 func handle_eel_baby():
 	var eel_baby_exists = false

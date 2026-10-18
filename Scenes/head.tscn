@@ -19,4 +19,9 @@ volume_db = 1.368
 stream = ExtResource("3_nfxfi")
 volume_db = -1.825
 
+[node name="EelHurtDelay" type="Timer" parent="." unique_id=250683250]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]
+[connection signal="timeout" from="EelHurtDelay" to="." method="_on_eel_hurt_delay_timeout"]
