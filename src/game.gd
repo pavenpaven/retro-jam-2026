@@ -2,6 +2,9 @@ extends Node2D
 
 @onready var head = $Head
 @onready var firesfx = $eldsfx
+@onready var enemytick = $EnemyTick
+
+var enemy_extra_tick = 1.0
 
 var map = {}
 var map_sprites = {}
@@ -21,8 +24,6 @@ func _ready():
 	for i in range(-5, 15):
 		for j in range(-1, 10):
 			map[Vector2(i,j)] = {"type": "empty"}
-			if randi() % 10 == 0:
-				map[Vector2(i,j)] = {"type": "rock"}
 
 			var sprite = Sprite2D.new()
 			map_sprites[Vector2(i,j)] = sprite
@@ -37,8 +38,15 @@ func _ready():
 			
 			# Death to america
 			# UVS är en terrororganisation
+	for i in range(17):
+		map[random_position()] = {"type": "rock"}
+			
 	random_seg()
 	random_seg()
+
+	for i in head.tail + [head.map_cords]: 
+		map[i] = {"type": "empty"}
+
 			
 	for i in range(8):
 		map[Vector2(-i/2 - 1, i)] = {"type": "sand"}
@@ -69,7 +77,7 @@ func _ready():
 
 func random_seg():
 	var vec = random_position()
-	if not(vec.y > 4 and vec.y < 6):
+	if not (vec.y > 4 and vec.y < 6) or (vec.x + 2*vec.y < 4 or vec.x + 2*vec.y > 18):
 		random_seg()
 		return
 	var dir = directions[randi() % len(directions)]
@@ -91,9 +99,6 @@ func fill_traps():
 				fill_traps()
 				return
 					
-					
-				
-			
 
 	
 func tile_sheet(tile):
@@ -217,7 +222,7 @@ func _process(dt):
 			numfire+=1
 			map[k]["timer"] -= dt
 			if map[k]["timer"] <= 0:
-				map[k] = {"type": "fire", "timer": 6}
+				map[k] = {"type": "fire", "timer": 4}
 				
 		
 		map_content_sprites[k].animation = tile_sheet(map[k])
@@ -260,6 +265,9 @@ func spawn():
 
 func _on_timer_timer_timeout() -> void:
 	prop = prop * (1 - 0.005)
+	enemy_extra_tick *= 0.95
+	enemytick.wait_time = enemy_extra_tick + 1
+	
 
 	
 func _on_enemy_tick_timeout() -> void:
