@@ -49,9 +49,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_po0sg")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"seagullattack",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -59,7 +59,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"seagulldie",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -103,7 +103,7 @@ script = ExtResource("1_1f0kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=990975987]
 sprite_frames = SubResource("SpriteFrames_7kbpi")
-animation = &"seagullattack"
+animation = &"seagulldie"
 autoplay = "seagullfly"
 
 [node name="seagullattack" type="AudioStreamPlayer" parent="." unique_id=650114114]
