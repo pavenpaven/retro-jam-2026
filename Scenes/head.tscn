@@ -28,5 +28,10 @@ one_shot = true
 stream = ExtResource("4_nfxfi")
 volume_db = -13.685
 
+[node name="MouseCooldown" type="Timer" parent="." unique_id=1765512964]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]
 [connection signal="timeout" from="EelHurtDelay" to="." method="_on_eel_hurt_delay_timeout"]
+[connection signal="timeout" from="MouseCooldown" to="." method="_on_mouse_cooldown_timeout"]

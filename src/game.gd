@@ -177,7 +177,7 @@ func input():
 				best_dir = i
 				min_distance = (v-w).length()
 				
-		head.try_walk(best_dir)
+		head.try_walk(best_dir, true)
 		
 				
 	

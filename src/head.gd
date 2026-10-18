@@ -5,10 +5,12 @@ extends Node2D
 @onready var eelhurtsfx = $eelhurt
 @onready var starsfx    = $starsfx
 @onready var eelbabysfx = $eelbebis
+@onready var mousecooldown = $MouseCooldown
 
 var is_invicible = false
 var map_cords = Vector2(5,5)
 var tail      = [Vector2(3,2),Vector2(3,3), Vector2(3,4), Vector2(4,4),Vector2(5,4)]
+var mouse_on_delay = false
 
 var old_tail_pos = tail[0]
 
@@ -40,12 +42,16 @@ func on_damage():
 func on_enemy_touch():
 	on_damage()
 
-func try_walk(dir):
-	var new_pos = map_cords + dir
-	if not new_pos in tail.slice(1) and not dir == Vector2(0,0) and get_parent().allowed(new_pos):
-		old_tail_pos = tail[0]
-		travel()
-		map_cords = new_pos
+func try_walk(dir, ismouse = false):
+	if not mouse_on_delay or not ismouse:
+		if ismouse:
+			mousecooldown.start()
+			mouse_on_delay = true
+		var new_pos = map_cords + dir
+		if not new_pos in tail.slice(1) and not dir == Vector2(0,0) and get_parent().allowed(new_pos):
+			old_tail_pos = tail[0]
+			travel()
+			map_cords = new_pos
 	
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -71,3 +77,7 @@ func _on_invincibility_timeout() -> void:
 
 func _on_eel_hurt_delay_timeout() -> void:
 	eelhurtsfx.play()
+
+
+func _on_mouse_cooldown_timeout() -> void:
+	mouse_on_delay = false
