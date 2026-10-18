@@ -68,7 +68,7 @@ func _input(event):
 			vec = Vector2(-1, 1)
 		if event.keycode in [KEY_A, KEY_H]:
 			vec = Vector2(-1, 0)
-		
+		try_walk(vec)
 			
 
 func _on_invincibility_timeout() -> void:

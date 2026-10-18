@@ -29,7 +29,7 @@ stream = ExtResource("4_nfxfi")
 volume_db = -13.685
 
 [node name="MouseCooldown" type="Timer" parent="." unique_id=1765512964]
-wait_time = 0.3
+wait_time = 0.1
 one_shot = true
 
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]
