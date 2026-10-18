@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvym52s4elf2h"
-path="res://.godot/imported/eelredbody3.PNG-60fd7b3d73b2a0f9afff56c718a8f63f.ctex"
+uid="uid://pk082dk3ld57"
+path="res://.godot/imported/eelhead1.PNG-83a5d0a5c1fd1c574b6dcbdc547bb784.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/eel/eelredbody3.PNG"
-dest_files=["res://.godot/imported/eelredbody3.PNG-60fd7b3d73b2a0f9afff56c718a8f63f.ctex"]
+source_file="res://Assets/Images/eel/red/eelhead1.PNG"
+dest_files=["res://.godot/imported/eelhead1.PNG-83a5d0a5c1fd1c574b6dcbdc547bb784.ctex"]
 
 [params]
 
