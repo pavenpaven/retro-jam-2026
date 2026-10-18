@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2ubnyvwtspx0" path="res://Assets/Images/rock.PNG" id="4_j6oam"]
 [ext_resource type="Texture2D" uid="uid://c1f36i0tcq1do" path="res://Assets/Images/nothing.PNG" id="4_r3knd"]
 [ext_resource type="Texture2D" uid="uid://dj46u5dpaaoww" path="res://Assets/Images/starsprite.PNG" id="6_j6oam"]
+[ext_resource type="Texture2D" uid="uid://cjfrrton84yvr" path="res://Assets/Images/vitsand.PNG" id="7_7nlh7"]
 [ext_resource type="Texture2D" uid="uid://dnq20wkh8se2j" path="res://Assets/Images/starrise.PNG" id="7_hlrca"]
 [ext_resource type="Texture2D" uid="uid://cpqbgu7s0j08e" path="res://Assets/Images/target.PNG" id="8_hlrca"]
 
@@ -60,6 +61,10 @@ region = Rect2(0, 0, 33, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6ntp"]
 atlas = ExtResource("4_j6oam")
+region = Rect2(0, 0, 33, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4qj3"]
+atlas = ExtResource("7_7nlh7")
 region = Rect2(0, 0, 33, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujo64"]
@@ -167,6 +172,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_u4qj3")
+}],
+"loop": 1,
+"name": &"sand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ujo64")
 }, {
 "duration": 1.0,
@@ -207,4 +220,4 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=699409823]
 sprite_frames = SubResource("SpriteFrames_pv606")
-animation = &"starrise"
+animation = &"sand"
