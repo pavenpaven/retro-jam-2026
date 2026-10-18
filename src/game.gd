@@ -247,6 +247,12 @@ func handle_eel_baby():
 
 	if not eel_baby_exists:
 		var vec = random_position()
+		var num_blocked = 0
+		for i in directions:
+			num_blocked += int(map[vec + i]["type"] in ["rock", "sand"])
+		if num_blocked > 2:
+			handle_eel_baby()
+			return
 		map[vec] = {"type": "eelbaby"}
 		
 		
