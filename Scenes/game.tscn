@@ -69,5 +69,15 @@ autoplay = "bubbla3"
 [node name="EnemyTick" type="Timer" parent="." unique_id=745619471]
 autostart = true
 
+[node name="Starspawn" type="Timer" parent="." unique_id=1233903884]
+wait_time = 5.0
+autostart = true
+
+[node name="Seagull" type="Timer" parent="." unique_id=603043593]
+wait_time = 10.0
+autostart = true
+
 [connection signal="timeout" from="TimerTimer" to="." method="_on_timer_timer_timeout"]
 [connection signal="timeout" from="EnemyTick" to="." method="_on_enemy_tick_timeout"]
+[connection signal="timeout" from="Starspawn" to="." method="_on_starspawn_timeout"]
+[connection signal="timeout" from="Seagull" to="." method="_on_seagull_timeout"]
