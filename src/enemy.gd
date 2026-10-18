@@ -9,6 +9,7 @@ var is_shark = false
 @onready var anim = $AnimatedSprite2D
 @onready var seagullattacksfx = $seagullattack
 @onready var sharkattacksfx = $sharkattack
+@onready var seagullburnsfx = $seagullburn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _process(delta: float) -> void:
 	position = Globals.to_real_cords(map_cords)
 	var	map = get_parent().map
 	if map[map_cords]["type"] == "fire" and not is_shark:
+		seagullburnsfx.play()
 		anim.play("seagulldie")
 		var dead = true
 		

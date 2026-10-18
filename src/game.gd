@@ -12,6 +12,7 @@ var enemies = []
 @export var do_play_fire_sound  = true
 var enemy_scene
 
+var directions = [Vector2(0,-1), Vector2(1, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 1), Vector2(-1, 0)]
 
 var prop = 1.0
 
@@ -36,7 +37,9 @@ func _ready():
 			
 			# Death to america
 			# UVS är en terrororganisation
-
+	random_seg()
+	random_seg()
+			
 	for i in range(8):
 		map[Vector2(-i/2 - 1, i)] = {"type": "sand"}
 		map[Vector2(-i/2 + 12, i)] = {"type": "sand"}
@@ -47,6 +50,9 @@ func _ready():
 
 	map[Vector2(-3, 7)] = {"type": "rock"}
 	map[Vector2(-3 + 11, 7)] = {"type": "rock"}
+
+	fill_traps()
+	
 	for i in head.tail:
 		var sprite = Sprite2D.new()
 		tail_segs.append(sprite)
@@ -61,6 +67,35 @@ func _ready():
 	enemy.is_shark = true
 	add_child(enemy)
 
+func random_seg():
+	var vec = random_position()
+	if not(vec.y > 4 and vec.y < 6):
+		random_seg()
+		return
+	var dir = directions[randi() % len(directions)]
+	for i in range(3):
+		if vec in map:
+			map[vec] = {"type": "rock"}
+		vec = vec + dir
+
+func fill_traps():
+	for i in map:
+		if map[i]["type"] == "empty":
+			var num_exists = 0
+			for dir in directions:
+				var vec = i + dir
+				if (not vec in map) or map[vec]["type"] == "empty":
+					num_exists += 1
+			if num_exists < 2:
+				map[i] = {"type": "sand"}
+				fill_traps()
+				return
+					
+					
+				
+			
+
+	
 func tile_sheet(tile):
 	if tile["type"] == "star":
 		if tile["timer"] > 0:
@@ -106,7 +141,7 @@ func on_tick():
 		if map[i]["type"] == "eelbaby":
 			map[i] = {"type": "empty"}
 			Globals.score += 1
-			print(Globals.score)
+			head.eelbabysfx.play()
 			
 
 		
@@ -114,7 +149,7 @@ func on_tick():
 func orientation(v):
 	var ind
 	var n = 0
-	for i in [Vector2(0,-1), Vector2(1, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 1), Vector2(-1, 0)]:
+	for i in directions:
 		if i == v:
 			ind = n
 		n+=1
