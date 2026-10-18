@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tuybcjhryl6f" path="res://src/head.gd" id="1_hukeq"]
 [ext_resource type="AudioStream" uid="uid://cg6jl24cycsen" path="res://Assets/Sound/eel_hurt.mp3" id="2_x4cii"]
 [ext_resource type="AudioStream" uid="uid://cehiw1c4s1813" path="res://Assets/Sound/starsfx.mp3" id="3_nfxfi"]
+[ext_resource type="AudioStream" uid="uid://bj3h51xkf54to" path="res://Assets/Sound/eelbebis.mp3" id="4_nfxfi"]
 
 [node name="Head" type="Node2D" unique_id=113268613]
 script = ExtResource("1_hukeq")
@@ -22,6 +23,10 @@ volume_db = -1.825
 [node name="EelHurtDelay" type="Timer" parent="." unique_id=250683250]
 wait_time = 0.2
 one_shot = true
+
+[node name="eelbebis" type="AudioStreamPlayer" parent="." unique_id=1766475574]
+stream = ExtResource("4_nfxfi")
+volume_db = -13.685
 
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]
 [connection signal="timeout" from="EelHurtDelay" to="." method="_on_eel_hurt_delay_timeout"]
