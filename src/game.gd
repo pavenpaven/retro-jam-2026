@@ -15,7 +15,7 @@ var prop = 1.0
 func _ready():
 	var anim = load("res://Scenes/animated_sprite_2d.tscn")
 	for i in range(-5, 15):
-		for j in range(10):
+		for j in range(-1, 10):
 			map[Vector2(i,j)] = {"type": "empty"}
 			if randi() % 10 == 0:
 				map[Vector2(i,j)] = {"type": "rock"}
@@ -34,6 +34,16 @@ func _ready():
 			# Death to america
 			# UVS är en terrororganisation
 
+	for i in range(8):
+		map[Vector2(-i/2 - 1, i)] = {"type": "sand"}
+		map[Vector2(-i/2 + 12, i)] = {"type": "sand"}
+		
+	for i in range(14):
+		map[Vector2(i, -1)] = {"type": "sand"}
+		map[Vector2(i - 5, -1 + 9)] = {"type": "sand"}
+
+	map[Vector2(-3, 7)] = {"type": "rock"}
+	map[Vector2(-3 + 11, 7)] = {"type": "rock"}
 	for i in head.tail:
 		var sprite = Sprite2D.new()
 		tail_segs.append(sprite)
@@ -49,12 +59,16 @@ func _ready():
 	add_child(enemy)
 
 func tile_sheet(tile):
+	if tile["type"] == "star":
+		if tile["timer"] > 0:
+			return "starrise"
 	return {"empty": "nothing"
 		   ,"rock": "rock"
 		   ,"fire": "fire"
 		   ,"target":"target"
 		   ,"star": "star"
-		   ,"eelbaby":"eelbaby"}[tile["type"]]
+		   ,"eelbaby":"eelbaby"
+		   ,"sand":"sand"}[tile["type"]]
 
 
 func allowed(pos, allow_player = false):
@@ -70,7 +84,7 @@ func allowed(pos, allow_player = false):
 			if i == pos:
 				return false
 	
-	return not map[pos]["type"] in ["rock"]
+	return not map[pos]["type"] in ["rock", "sand"]
 
 func on_tick():
 	for i in head.tail + [head.map_cords]:
@@ -138,6 +152,9 @@ func _process(dt):
 
 	var numfire = 0.0
 	for k in map_sprites:
+		if map[k]["type"] == "star":
+			map[k]["timer"] -= dt
+		
 		if map[k]["type"] == "fire":
 			numfire+=1
 			map[k]["timer"] -= dt
@@ -202,12 +219,11 @@ func _on_enemy_tick_timeout() -> void:
 
 func _on_starspawn_timeout() -> void:
 	var pos = random_position()
-	map[pos] = {"type": "star"}
+	map[pos] = {"type": "star", "timer": 0.3}
 
 
 func _on_seagull_timeout() -> void:
 	var pos = random_position()
-	print("spawn seagull")
 	var enemy = enemy_scene.instantiate()
 	enemy.map_cords = pos
 	enemy.attack.connect(head.on_enemy_touch)

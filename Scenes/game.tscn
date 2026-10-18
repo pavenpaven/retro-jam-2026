@@ -6,19 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://di764hfdjs2py" path="res://Scenes/bubbloranimering.tscn" id="4_3dryh"]
 
 [node name="Game" type="Node2D" unique_id=288948182]
-scale = Vector2(3, 3)
+scale = Vector2(2.8, 2.8)
 script = ExtResource("1_80nbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730263626]
+position = Vector2(197.24136, 111.3793)
+scale = Vector2(1.3513805, 1.3038793)
+texture = ExtResource("3_wrm1d")
 
 [node name="Head" parent="." unique_id=113268613 instance=ExtResource("2_e2o6t")]
 position = Vector2(284, 107.00003)
 
 [node name="TimerTimer" type="Timer" parent="." unique_id=754660148]
 autostart = true
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730263626]
-position = Vector2(192.41667, 108)
-scale = Vector2(1.1957425, 1.1145834)
-texture = ExtResource("3_wrm1d")
 
 [node name="bubbloranimering2" parent="." unique_id=587869133 instance=ExtResource("4_3dryh")]
 position = Vector2(131, 158.33333)

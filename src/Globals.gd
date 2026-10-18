@@ -20,6 +20,6 @@ func _ready() -> void:
 
 var sidelength = 32
 func to_real_cords(cords):
-	var a = (cords.y * Vector2(1, sqrt(3))/2 + Vector2(0, 0.35)) * sidelength
-	var b = (cords.x * Vector2(1, 0)) * sidelength
+	var a = (cords.y * Vector2(1, sqrt(3))/2 + Vector2(0, 0.6)) * sidelength
+	var b = (cords.x * Vector2(1, 0) + Vector2(0.67, 0)) * sidelength
 	return (a + b)
