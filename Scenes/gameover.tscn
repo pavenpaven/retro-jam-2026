@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dgr33mhx5ekwl" path="res://Assets/Images/buttonbackground.PNG" id="4_6kwjr"]
 [ext_resource type="PackedScene" uid="uid://di764hfdjs2py" path="res://Scenes/bubbloranimering.tscn" id="4_vskwr"]
 [ext_resource type="Texture2D" uid="uid://c0nsi0eiw8l6k" path="res://Assets/Images/buttonbackgroundpushed.PNG" id="5_bb3cs"]
+[ext_resource type="FontFile" uid="uid://ddo4jdbrjf7ku" path="res://Assets/m3x6.ttf" id="6_bb3cs"]
 
 [node name="Gameover" type="Node2D" unique_id=288948182]
 scale = Vector2(2.8, 2.8)
@@ -32,9 +33,21 @@ scale = Vector2(2, 2)
 animation = &"bubble5"
 autoplay = "bubble5"
 
+[node name="bubbloranimering12" parent="." unique_id=877111186 instance=ExtResource("4_vskwr")]
+position = Vector2(340, 100)
+scale = Vector2(1.3, 1.3)
+animation = &"bubble5"
+autoplay = "bubble5"
+
 [node name="bubbloranimering6" parent="." unique_id=1641591727 instance=ExtResource("4_vskwr")]
 position = Vector2(245.33333, 38)
 scale = Vector2(1.5, 1.5)
+animation = &"bubble5"
+autoplay = "bubble5"
+
+[node name="bubbloranimering11" parent="." unique_id=1314805688 instance=ExtResource("4_vskwr")]
+position = Vector2(-120, 140)
+scale = Vector2(2.5, 2.5)
 animation = &"bubble5"
 autoplay = "bubble5"
 
@@ -61,28 +74,57 @@ scale = Vector2(2, 2)
 animation = &"bubbla3"
 autoplay = "bubbla3"
 
+[node name="bubbloranimering10" parent="." unique_id=788674485 instance=ExtResource("4_vskwr")]
+position = Vector2(302.14285, 221.07143)
+animation = &"bubbla3"
+autoplay = "bubbla3"
+
 [node name="Button" type="Button" parent="." unique_id=2056403879]
-offset_left = 147.14287
-offset_top = 83.57143
-offset_right = 247.85716
-offset_bottom = 143.92857
+z_index = 7
+offset_left = 148.0
+offset_top = 150.714
+offset_right = 268.0
+offset_bottom = 211.07115
+theme_override_colors/font_color = Color(0.07058824, 0.36862746, 0.9137255, 1)
+theme_override_colors/font_focus_color = Color(0.16078432, 0.5568628, 0.972549, 1)
+theme_override_colors/font_pressed_color = Color(0.16100001, 0.22388342, 0.7, 1)
+theme_override_colors/font_hover_color = Color(0.16078432, 0.5568628, 0.972549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.16078432, 0.5568628, 0.972549, 1)
+theme_override_fonts/font = ExtResource("6_bb3cs")
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+flat = true
 
 [node name="ButtonTexPressed" type="Sprite2D" parent="." unique_id=1629053984]
-position = Vector2(197.32141, 114.2857)
-scale = Vector2(1.5313853, 0.83011574)
+position = Vector2(205, 185.714)
+scale = Vector2(2, 0.7)
 texture = ExtResource("5_bb3cs")
 
 [node name="ButtonTexUnpressed" type="Sprite2D" parent="." unique_id=733053629]
-position = Vector2(197.39285, 114.10714)
-scale = Vector2(1.5292212, 0.82528967)
+position = Vector2(205, 185.357)
+scale = Vector2(2, 0.7)
 texture = ExtResource("4_6kwjr")
 
 [node name="Label" type="Label" parent="." unique_id=281055755]
-offset_left = 163.92857
-offset_top = 40.357143
-offset_right = 224.92857
-offset_bottom = 63.357143
+offset_left = 112.5
+offset_top = 49.642857
+offset_right = 370.5
+offset_bottom = 155.64285
+theme_override_fonts/font = ExtResource("6_bb3cs")
+theme_override_font_sizes/font_size = 90
 text = "Score: 0"
+
+[node name="Label2" type="Label" parent="." unique_id=217797176]
+offset_left = 45.357143
+offset_top = -26.428574
+offset_right = 370.35715
+offset_bottom = 79.57143
+theme_override_colors/font_shadow_color = Color(0.17600003, 0.1968, 0.8, 0.5647059)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("6_bb3cs")
+theme_override_font_sizes/font_size = 133
+text = "GAME OVER"
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
