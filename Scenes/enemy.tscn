@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cq5dudgigogn2" path="res://src/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://miken7nk22d7" path="res://Assets/Images/seagull.PNG" id="1_hghv2"]
+[ext_resource type="Texture2D" uid="uid://dsi5e77si8hdy" path="res://Assets/Images/seagullattack.PNG" id="2_287tu"]
 [ext_resource type="Texture2D" uid="uid://d3mqic546nsx4" path="res://Assets/Images/sharksprite.PNG" id="3_afpow"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
+atlas = ExtResource("2_287tu")
+region = Rect2(0, 0, 33, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
 atlas = ExtResource("1_hghv2")
@@ -38,6 +43,14 @@ region = Rect2(0, 37, 33, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7kbpi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0sg")
+}],
+"loop": 1,
+"name": &"seagullattack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1f0kj")
@@ -88,7 +101,7 @@ script = ExtResource("1_1f0kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=990975987]
 sprite_frames = SubResource("SpriteFrames_7kbpi")
-animation = &"sharkattack"
+animation = &"seagullattack"
 autoplay = "seagullfly"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
